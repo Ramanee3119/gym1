@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Classic Fitness - Gym & Fitness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Modern high-energy gym and fitness website with bodybuilding, weight loss, yoga, and CrossFit plans." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #05060a;
+      --bg-card: #10121b;
+      --bg-card-soft: #161827;
+      --accent-red: #ff375e;
+      --accent-orange: #ff8c32;
+      --accent-green: #18e29b;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.18);
+      --radius-lg: 18px;
+      --radius-full: 999px;
+      --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.65);
+      --shadow-glow: 0 0 25px rgba(255, 55, 94, 0.35);
+      --transition-fast: 0.2s ease;
+      --transition-med: 0.35s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top left, #14172b 0, #05060a 45%, #020308 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* Layout */
+    .layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* SIDE MENU */
+    .side-menu {
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      height: 100vh;
+      width: 260px;
+      padding: 24px 18px;
+      background: linear-gradient(180deg, #05060a 0%, #040510 40%, #05060a 100%);
+      border-right: 1px solid rgba(148, 163, 184, 0.16);
+      box-shadow: 18px 0 50px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      z-index: 40;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #ff8c32, #ff375e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .brand-text h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      font-size: 11px;
+      color: var(--accent-green);
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .side-menu-heading {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .category-btn {
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), border var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 55, 94, 0.12), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .category-btn:hover::before {
+      opacity: 1;
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.6);
+      border-color: rgba(248, 250, 252, 0.18);
+    }
+
+    .category-btn.active {
+      background: radial-gradient(circle at top left, rgba(255, 55, 94, 0.32), rgba(15, 23, 42, 0.95));
+      border-color: rgba(248, 250, 252, 0.4);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .category-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .category-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .category-label span {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .category-label strong {
+      font-size: 13px;
+    }
+
+    .side-highlight {
+      margin-top: auto;
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      background: radial-gradient(circle at top right, rgba(24, 226, 155, 0.22), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 16px 40px rgba(8, 47, 73, 0.75);
+      font-size: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .side-highlight::before {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 60%);
+      top: -82px;
+      right: -50px;
+      opacity: 0.4;
+      filter: blur(1px);
+    }
+
+    .side-highlight-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #e0f2fe;
+      margin-bottom: 2px;
+    }
+
+    .side-highlight strong {
+      font-size: 12px;
+      color: #f9fafb;
+    }
+
+    .side-highlight span {
+      display: block;
+      color: #bae6fd;
+      margin-top: 4px;
+    }
+
+    .side-highlight-cta {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(125, 211, 252, 0.7);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+      position: relative;
+      z-index: 1;
+    }
+
+    .side-highlight-cta:hover {
+      background: rgba(8, 47, 73, 0.9);
+      transform: translateY(-1px);
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      flex: 1;
+      padding: 20px 24px 40px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .main-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* TOP NAV */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(5, 6, 10, 0.96), rgba(5, 6, 10, 0.75), transparent 100%);
+      padding: 10px 0 14px;
+      margin-bottom: 8px;
+    }
+
+    .top-nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .top-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .top-nav-link {
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: color var(--transition-fast), background var(--transition-fast), border var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .top-nav-link:hover {
+      color: #f9fafb;
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .top-nav-link.primary {
+      background: radial-gradient(circle at top left, var(--accent-red), var(--accent-orange));
+      color: #0b1120;
+      border: none;
+      font-weight: 600;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .top-nav-metrics {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .metric-pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(75, 85, 99, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(12px);
+    }
+
+    .metric-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 10px;
+      color: #9ca3af;
+    }
+
+    .metric-value {
+      font-size: 12px;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+      gap: 22px;
+      margin-top: 6px;
+      margin-bottom: 32px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-green);
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 3.6vw, 40px);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, #f97316, #fb7185, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      border: none;
+      background: radial-gradient(circle at top left, var(--accent-red), var(--accent-orange));
+      color: #0b1120;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: var(--shadow-glow);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.4), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary:hover::after {
+      opacity: 1;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 20px 40px rgba(248, 113, 113, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 9px 15px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), border var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(31, 41, 55, 0.9);
+      border-color: rgba(148, 163, 184, 1);
+      transform: translateY(-1px);
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      font-size: 11px;
+    }
+
+    .hero-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-badge span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    .hero-bg {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      min-height: 260px;
+      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.42), rgba(15, 23, 42, 0.96));
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background-image: url("https://images.pexels.com/photos/2261485/pexels-photo-2261485.jpeg?auto=compress&cs=tinysrgb&w=1600");
+      background-size: cover;
+      background-position: 60% 10%;
+      transform: scale(1.08);
+      transform-origin: center;
+      filter: contrast(1.1) saturate(1.15);
+      will-change: transform;
+      transition: transform 0.8s ease-out;
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.3) 40%, rgba(15, 23, 42, 0.9) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .hero-bg-overlay {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 20px;
+    }
+
+    .hero-overlay-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .hero-logo-pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-stat-chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(248, 113, 113, 0.8);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #fecaca;
+    }
+
+    .hero-stat-chip strong {
+      color: #fee2e2;
+    }
+
+    .hero-overlay-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-metric-card {
+      padding: 8px 11px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-metric-card span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    .hero-metric-card strong {
+      font-size: 13px;
+    }
+
+    .hero-timetable-cta {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(52, 211, 153, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .hero-timetable-cta:hover {
+      background: rgba(6, 78, 59, 0.9);
+      transform: translateY(-1px);
+    }
+
+    /* SECTION WRAPPERS */
+    section {
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* EXERCISES */
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
+    }
+
+    .exercise-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      transform-origin: center;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border var(--transition-med), background var(--transition-med);
+    }
+
+    .exercise-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      border-color: rgba(248, 250, 252, 0.25);
+      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.12), #020617);
+    }
+
+    .exercise-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 130px;
+    }
+
+    .exercise-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-med);
+    }
+
+    .exercise-card:hover .exercise-img-wrap img {
+      transform: scale(1.1);
+    }
+
+    .exercise-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(248, 113, 113, 0.8);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .exercise-body {
+      padding: 10px 11px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .exercise-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .exercise-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .difficulty-pill {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .difficulty-pill.easy {
+      border-color: rgba(52, 211, 153, 0.8);
+      color: #bbf7d0;
+    }
+
+    .difficulty-pill.medium {
+      border-color: rgba(250, 204, 21, 0.8);
+      color: #fef9c3;
+    }
+
+    .difficulty-pill.hard {
+      border-color: rgba(248, 113, 113, 0.9);
+      color: #fee2e2;
+    }
+
+    /* MEMBERSHIP PLANS */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .plan-card {
+      position: relative;
+      padding: 16px 14px 14px;
+      border-radius: 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .plan-card.popular {
+      border-color: rgba(251, 113, 133, 0.8);
+      box-shadow: 0 22px 50px rgba(251, 113, 133, 0.35);
+      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.22), #020617);
+    }
+
+    .plan-popular-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 10px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(248, 113, 113, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .plan-name {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .plan-price {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .plan-price span {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .plan-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .plan-benefits {
+      list-style: none;
+      margin-top: 4px;
+      margin-bottom: 6px;
+      padding-left: 0;
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .plan-benefits li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .plan-benefits li::before {
+      content: "✓";
+      color: var(--accent-green);
+      font-size: 11px;
+    }
+
+    .plan-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .plan-cta {
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: none;
+      font-size: 11px;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      transition: background var(--transition-fast), transform var(--transition-fast), border var(--transition-fast);
+    }
+
+    .plan-cta.primary {
+      background: radial-gradient(circle at top left, var(--accent-red), var(--accent-orange));
+      color: #0b1120;
+      border: none;
+      font-weight: 600;
+    }
+
+    .plan-cta:hover {
+      transform: translateY(-1px);
+      background: rgba(31, 41, 55, 0.9);
+      border-color: rgba(209, 213, 219, 0.9);
+    }
+
+    .plan-cta.primary:hover {
+      background: radial-gradient(circle at top left, #fb7185, #fb923c);
+    }
+
+    /* TIMETABLE */
+    .timetable-tabs {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .timetable-tab {
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .timetable-tab.active {
+      background: radial-gradient(circle at top left, var(--accent-red), var(--accent-orange));
+      color: #020617;
+      font-weight: 600;
+      transform: translateY(-1px);
+    }
+
+    .timetable-grid {
+      display: grid;
+      grid-template-columns: 130px repeat(auto-fit, minmax(130px, 1fr));
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 11px;
+    }
+
+    .timetable-cell {
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      border-right: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 8px 10px;
+      min-height: 42px;
+    }
+
+    .timetable-head {
+      background: rgba(17, 24, 39, 0.95);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #e5e7eb;
+      font-size: 10px;
+    }
+
+    .timetable-slot {
+      color: #e5e7eb;
+    }
+
+    .timetable-slot span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .timetable-slot.highlight {
+      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.18), rgba(17, 24, 39, 0.95));
+      border-radius: 10px;
+      padding: 6px 7px;
+    }
+
+    /* TRAINERS / TOP MENU SECTION */
+    .trainer-row {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 16px;
+    }
+
+    .vision-box {
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vision-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 10px;
+    }
+
+    .vision-tag {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #d1d5db;
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .ach-card {
+      border-radius: 14px;
+      padding: 8px 9px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 11px;
+    }
+
+    .ach-card strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .trainer-card {
+      border-radius: 18px;
+      padding: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 95px minmax(0, 1fr);
+      gap: 10px;
+      font-size: 12px;
+      align-items: center;
+    }
+
+    .trainer-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      height: 120px;
+      background: #020617;
+    }
+
+    .trainer-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .trainer-info h3 {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .trainer-specialization {
+      font-size: 11px;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+    }
+
+    .trainer-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .trainer-contact {
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    /* EQUIPMENT */
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+    }
+
+    .equipment-card {
+      border-radius: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 10px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .equipment-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .equipment-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .equipment-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .equipment-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .equipment-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .equipment-weights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      font-size: 10px;
+    }
+
+    .weight-pill {
+      padding: 4px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.5fr) minmax(0, 2fr) minmax(0, 2.2fr);
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .footer-section-title {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+
+    .footer-contact p,
+    .footer-links a,
+    .footer-social a {
+      margin-bottom: 4px;
+    }
+
+    .footer-links a,
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+
+    .footer-links a:hover,
+    .footer-social a:hover {
+      color: #f97316;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom span {
+      font-size: 10px;
+    }
+
+    /* SCROLL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* BUTTON RIPPLE EFFECT (JS adds .ripple) */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple span.ripple-circle {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      background: rgba(248, 250, 252, 0.3);
+      animation: ripple 600ms linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      .side-menu {
+        display: none;
+      }
+      body {
+        display: block;
+      }
+      .main {
+        padding: 16px 16px 30px;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .top-nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-bg {
+        min-height: 220px;
+      }
+      .timetable-grid {
+        font-size: 10px;
+      }
+      .trainer-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Extra fine-tuning for small phones while keeping same UI/layout */
+    @media (max-width: 600px) {
+      .main {
+        padding: 14px 12px 24px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .section-title {
+        font-size: 15px;
+      }
+
+      .hero-subtitle {
+        max-width: 100%;
+      }
+
+      .hero-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .top-nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        row-gap: 6px;
+      }
+
+      .top-nav-link {
+        padding-inline: 10px;
+      }
+
+      .exercise-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .plans-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .equipment-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .timetable-grid {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .timetable-cell {
+        min-width: 110px;
+      }
+
+      .trainer-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- SIDE MENU -->
+    <aside class="side-menu">
+      <div class="brand">
+        <div class="brand-logo">IP</div>
+        <div class="brand-text">
+          <h1>Classic</h1>
+          <span>Elite Gym Studio</span>
+        </div>
+      </div>
+
+      <p class="side-menu-heading">Training Focus</p>
+
+      <div class="category-list" id="categoryList">
+        <button class="category-btn active" data-category="bodybuilding">
+          <div class="category-icon">💪</div>
+          <div class="category-label">
+            <span>Mass & Strength</span>
+            <strong>Body Building</strong>
+          </div>
+        </button>
+        <button class="category-btn" data-category="weight-gain">
+          <div class="category-icon">🍽️</div>
+          <div class="category-label">
+            <span>Lean Bulk</span>
+            <strong>Weight Gain</strong>
+          </div>
+        </button>
+        <button class="category-btn" data-category="weight-loss">
+          <div class="category-icon">🔥</div>
+          <div class="category-label">
+            <span>Fat Burn</span>
+            <strong>Weight Loss</strong>
+          </div>
+        </button>
+        <button class="category-btn" data-category="yoga">
+          <div class="category-icon">🧘</div>
+          <div class="category-label">
+            <span>Mind & Body</span>
+            <strong>Yoga & Meditation</strong>
+          </div>
+        </button>
+        <button class="category-btn" data-category="cardio">
+          <div class="category-icon">🏃</div>
+          <div class="category-label">
+            <span>Endurance</span>
+            <strong>CrossFit / Cardio</strong>
+          </div>
+        </button>
+      </div>
+
+      <div class="side-highlight">
+        <div class="side-highlight-title">Limited Spots</div>
+        <strong>Founders’ Launch Offer – 40% OFF</strong>
+        <span>First 100 memberships get free body scan & diet chart.</span>
+        <button class="side-highlight-cta ripple">
+          Claim Offer
+          <span>→</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <div class="main-inner">
+        <!-- TOP NAV -->
+        <header class="top-nav">
+          <div class="top-nav-inner">
+            <nav class="top-nav-links">
+              <a href="#achievements" class="top-nav-link">Achievements</a>
+              <a href="#vision" class="top-nav-link">Vision &amp; Mission</a>
+              <a href="#trainers" class="top-nav-link">Faculty / Trainers</a>
+              <a href="#plans" class="top-nav-link">Membership Plans</a>
+              <button class="top-nav-link primary ripple">Book Free Trial</button>
+            </nav>
+            <div class="top-nav-metrics">
+              <div class="metric-pill">
+                <div>
+                  <div class="metric-label">Transformations</div>
+                  <div class="metric-value">1,800+ Members</div>
+                </div>
+              </div>
+              <div class="metric-pill">
+                <div>
+                  <div class="metric-label">Awards</div>
+                  <div class="metric-value">Best Fitness Hub 2025</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+          <div class="hero-copy reveal">
+            <div class="hero-kicker">Premium Gym &amp; Fitness Studio</div>
+            <h2 class="hero-title">
+              Build the strongest version of
+              <span>yourself.</span>
+            </h2>
+            <p class="hero-subtitle">
+              Classic Fitness blends science-backed training, clean nutrition guidance, and elite coaching to help you gain
+              muscle, lose fat, and unlock unstoppable confidence.
+            </p>
+            <div class="hero-cta-row">
+              <button class="btn-primary ripple">Join Now – Start Today</button>
+              <button class="btn-secondary ripple">
+                View Class Timetable
+                <span>↗</span>
+              </button>
+            </div>
+            <div class="hero-badges">
+              <div class="hero-badge">
+                <span></span>
+                24x7 Access for Premium Members
+              </div>
+              <div class="hero-badge">
+                <span></span>
+                Certified Strength &amp; Conditioning Coaches
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-bg reveal">
+            <div class="hero-bg-img" id="heroBG"></div>
+            <div class="hero-bg-gradient"></div>
+            <div class="hero-bg-overlay">
+              <div class="hero-overlay-top">
+                <div class="hero-logo-pill">Classic • Downtown Studio</div>
+                <div class="hero-stat-chip">
+                  <strong>92%</strong> success in 16-week programs
+                </div>
+              </div>
+              <div class="hero-overlay-bottom">
+                <div class="hero-metrics">
+                  <div class="hero-metric-card">
+                    <span>Bodybuilding</span>
+                    <strong>+8kg Lean Mass</strong>
+                  </div>
+                  <div class="hero-metric-card">
+                    <span>Weight Loss</span>
+                    <strong>-10kg Avg / 12 Weeks</strong>
+                  </div>
+                </div>
+                <button class="hero-timetable-cta ripple">
+                  <span>⏰</span>
+                  Today’s Classes
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXERCISES -->
+        <section id="exercises">
+          <div class="section-header">
+            <h3 class="section-title">Trending Workout Tracks</h3>
+            <p class="section-subtitle" id="exerciseSubtitle">
+              Showing: Body Building programs designed for strength and hypertrophy.
+            </p>
+          </div>
+
+          <div class="exercise-grid reveal" id="exerciseGrid">
+            <!-- Cards injected by JS -->
+          </div>
+        </section>
+
+        <!-- MEMBERSHIP PLANS -->
+        <section id="plans">
+          <div class="section-header">
+            <h3 class="section-title">Membership Plans</h3>
+            <p class="section-subtitle">Flexible access for your lifestyle. Upgrade anytime.</p>
+          </div>
+          <div class="plans-grid reveal">
+            <article class="plan-card">
+              <div class="plan-name">Daily Pass</div>
+              <div class="plan-price">
+                ₹299 <span>/ day</span>
+              </div>
+              <p class="plan-meta">Perfect for travellers or casual drop-ins.</p>
+              <ul class="plan-benefits">
+                <li>All-day access to gym floor</li>
+                <li>Locker &amp; shower facility</li>
+                <li>Access to 1 group class (if available)</li>
+              </ul>
+              <div class="plan-footer">
+                <span>Timing: 6 AM – 10 PM</span>
+                <button class="plan-cta ripple">Grab a Day Pass</button>
+              </div>
+            </article>
+
+            <article class="plan-card popular">
+              <div class="plan-popular-badge">Most Popular</div>
+              <div class="plan-name">Weekly Transformation</div>
+              <div class="plan-price">
+                ₹1,499 <span>/ week</span>
+              </div>
+              <p class="plan-meta">Kick-start real change with coaching support.</p>
+              <ul class="plan-benefits">
+                <li>Unlimited gym &amp; group classes</li>
+                <li>1:1 posture &amp; form assessment</li>
+                <li>Customized weekly workout split</li>
+                <li>WhatsApp progress check-ins</li>
+              </ul>
+              <div class="plan-footer">
+                <span>Timing: 5 AM – 11 PM</span>
+                <button class="plan-cta primary ripple">Start Weekly Plan</button>
+              </div>
+            </article>
+
+            <article class="plan-card">
+              <div class="plan-name">Monthly Elite</div>
+              <div class="plan-price">
+                ₹3,999 <span>/ month</span>
+              </div>
+              <p class="plan-meta">Best value for consistent, long-term results.</p>
+              <ul class="plan-benefits">
+                <li>All-access gym &amp; premium classes</li>
+                <li>Personalized training roadmap</li>
+                <li>Nutrition &amp; habit coaching</li>
+                <li>Body composition scan (every 4 weeks)</li>
+              </ul>
+              <div class="plan-footer">
+                <span>Timing: 24x7 Access</span>
+                <button class="plan-cta ripple">Upgrade to Elite</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- TIMETABLE -->
+        <section id="timetable">
+          <div class="section-header">
+            <h3 class="section-title">Gym Timetable</h3>
+            <p class="section-subtitle">Morning &amp; evening sessions tailored for every goal.</p>
+          </div>
+
+          <div class="timetable-tabs">
+            <div class="timetable-tab active" data-session="morning">Morning Sessions</div>
+            <div class="timetable-tab" data-session="evening">Evening Sessions</div>
+          </div>
+
+          <div class="timetable-grid reveal" id="timetableGrid">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- VISION, ACHIEVEMENTS, TRAINERS -->
+        <section id="achievements">
+          <div class="section-header">
+            <h3 class="section-title">Vision, Achievements &amp; Trainers</h3>
+            <p class="section-subtitle">A team obsessed with your transformation.</p>
+          </div>
+
+          <div class="trainer-row reveal">
+            <article class="vision-box" id="vision">
+              <h4 class="footer-section-title">Vision &amp; Mission</h4>
+              <p>
+                We exist to turn everyday people into their strongest, healthiest selves—physically and mentally. Our mission
+                is to make sustainable fitness exciting, measurable, and deeply personalized.
+              </p>
+              <p>
+                From first-time lifters to stage-ready athletes, we combine coaching, community, and accountability to keep you
+                consistent and injury-free.
+              </p>
+              <div class="vision-tags">
+                <span class="vision-tag">Holistic Fitness</span>
+                <span class="vision-tag">Data-Driven Coaching</span>
+                <span class="vision-tag">Community First</span>
+              </div>
+              <div class="achievements-grid">
+                <div class="ach-card">
+                  <strong>3x</strong>
+                  Best Gym in City Awards (2023–2025).
+                </div>
+                <div class="ach-card">
+                  <strong>10,000+</strong>
+                  total kgs of fat lost by our members.
+                </div>
+                <div class="ach-card">
+                  <strong>4.9★</strong>
+                  Google rating from 1,200+ reviews.
+                </div>
+              </div>
+            </article>
+
+            <article class="trainer-card" id="trainers">
+              <div class="trainer-img-wrap">
+                <img
+                  src="https://images.pexels.com/photos/7676400/pexels-photo-7676400.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Head trainer at IronPulse Fitness"
+                />
+              </div>
+              <div class="trainer-info">
+                <h3>Coach Rohan Mehta</h3>
+                <div class="trainer-specialization">
+                  Head Strength Coach · CSCS · Transformation Specialist
+                </div>
+                <p class="trainer-meta">
+                  12+ years experience in bodybuilding, athletic conditioning, and rehab-focused training. Coached 300+ complete
+                  physique transformations.
+                </p>
+                <div class="trainer-contact">
+                  <strong>Studio Address:</strong> Classic Fitness, 3rd Floor, Nexus Plaza, MG Road, Bengaluru<br />
+                  <strong>Phone:</strong> +91-6383199220· <strong>Email:</strong> hello@Classicfit.com
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- EQUIPMENT -->
+        <section id="equipment">
+          <div class="section-header">
+            <h3 class="section-title">Gym Equipment</h3>
+            <p class="section-subtitle">
+              Commercial-grade equipment for bodybuilding, weight loss, functional training, and cardio.
+            </p>
+          </div>
+
+          <div class="equipment-grid reveal">
+            <article class="equipment-card">
+              <div class="equipment-top">
+                <div class="equipment-img">
+                  <img
+                    src="https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Dumbbells rack"
+                  />
+                </div>
+                <div>
+                  <div class="equipment-name">Hex Dumbbells</div>
+                  <div class="equipment-meta">Rubber coated · Ergonomic grip</div>
+                </div>
+              </div>
+              <div class="equipment-weights">
+                <span class="weight-pill">2kg</span>
+                <span class="weight-pill">4kg</span>
+                <span class="weight-pill">6kg</span>
+                <span class="weight-pill">8kg</span>
+                <span class="weight-pill">10kg</span>
+                <span class="weight-pill">12–30kg</span>
+                <span class="weight-pill">30kg+</span>
+              </div>
+            </article>
+
+            <article class="equipment-card">
+              <div class="equipment-top">
+                <div class="equipment-img">
+                  <img
+                    src="https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Barbell and weight plates"
+                  />
+                </div>
+                <div>
+                  <div class="equipment-name">Olympic Barbells</div>
+                  <div class="equipment-meta">Powerlifting &amp; technique bars</div>
+                </div>
+              </div>
+              <div class="equipment-weights">
+                <span class="weight-pill">10kg</span>
+                <span class="weight-pill">15kg</span>
+                <span class="weight-pill">20kg</span>
+                <span class="weight-pill">25kg</span>
+                <span class="weight-pill">35–45kg</span>
+                <span class="weight-pill">50kg+</span>
+              </div>
+            </article>
+
+            <article class="equipment-card">
+              <div class="equipment-top">
+                <div class="equipment-img">
+                  <img
+                    src="https://images.pexels.com/photos/7991661/pexels-photo-7991661.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Strength training machines"
+                  />
+                </div>
+                <div>
+                  <div class="equipment-name">Selectorized Machines</div>
+                  <div class="equipment-meta">Chest, back, legs &amp; cable stacks</div>
+                </div>
+              </div>
+              <div class="equipment-weights">
+                <span class="weight-pill">5kg–120kg Stack</span>
+                <span class="weight-pill">Plate Loaded</span>
+              </div>
+            </article>
+
+            <article class="equipment-card">
+              <div class="equipment-top">
+                <div class="equipment-img">
+                  <img
+                    src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Cardio equipment"
+                  />
+                </div>
+                <div>
+                  <div class="equipment-name">Cardio Zone</div>
+                  <div class="equipment-meta">Treadmills, bikes &amp; rowers</div>
+                </div>
+              </div>
+              <div class="equipment-weights">
+                <span class="weight-pill">Treadmills (0–20km/h)</span>
+                <span class="weight-pill">AirBikes</span>
+                <span class="weight-pill">Rowers</span>
+                <span class="weight-pill">Stair Climbers</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="footer">
+          <div class="footer-grid">
+            <div class="footer-contact">
+              <h4 class="footer-section-title">Contact</h4>
+              <p>Email: <a href="mailto:hello@ironpulsefit.com">hello@Classicfit.com</a></p>
+              <p>Phone: <a href="tel:+919876543210">+91-6383199220·</a></p>
+              <p>
+                Location:
+                <a
+                  href="https://www.google.com/maps"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View on Google Maps</a
+                >
+              </p>
+            </div>
+            <div class="footer-links">
+              <h4 class="footer-section-title">Quick Links</h4>
+              <a href="#exercises">Workout Programs</a><br />
+              <a href="#plans">Membership &amp; Pricing</a><br />
+              <a href="#timetable">Class Timetable</a><br />
+              <a href="#equipment">Equipment &amp; Facilities</a>
+            </div>
+            <div class="footer-social">
+              <h4 class="footer-section-title">Social</h4>
+              <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a><br />
+              <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a><br />
+              <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span>© <span id="year"></span> Classic Fitness. All rights reserved.</span>
+            <span>Designed for high conversion &amp; online + offline promotion.</span>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ------------------------------
+    // Data for exercises
+    // ------------------------------
+    const exerciseData = {
+      bodybuilding: [
+        {
+          name: "Barbell Bench Press",
+          image:
+            "https://images.pexels.com/photos/3837788/pexels-photo-3837788.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "4 sets x 6–10 reps",
+          level: "Intermediate",
+          difficulty: "medium",
+          tag: "Chest & Triceps"
+        },
+        {
+          name: "Deadlift",
+          image:
+            "https://images.pexels.com/photos/2261485/pexels-photo-2261485.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "5 sets x 3–5 reps",
+          level: "Advanced",
+          difficulty: "hard",
+          tag: "Full Body"
+        },
+        {
+          name: "Incline Dumbbell Press",
+          image:
+            "incline dumbbell press.png",
+          reps: "3 sets x 8–12 reps",
+          level: "Intermediate",
+          difficulty: "medium",
+          tag: "Upper Chest"
+        },
+        {
+          name: "Lat Pulldown",
+          image:
+            "https://images.pexels.com/photos/1552104/pexels-photo-1552104.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "4 sets x 10–12 reps",
+          level: "Beginner",
+          difficulty: "easy",
+          tag: "Back & Biceps"
+        }
+      ],
+      "weight-gain": [
+        {
+          name: "Goblet Squats",
+          image:
+            "https://images.pexels.com/photos/3823063/pexels-photo-3823063.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "4 sets x 10–12 reps",
+          level: "Beginner",
+          difficulty: "easy",
+          tag: "Legs & Glutes"
+        },
+        {
+          name: "Seated Cable Row",
+          image:
+            "https://images.pexels.com/photos/4753890/pexels-photo-4753890.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "3 sets x 10–15 reps",
+          level: "Beginner",
+          difficulty: "easy",
+          tag: "Back Thickness"
+        },
+        {
+          name: "Dumbbell Shoulder Press",
+          image:
+            "dumbbell shoulder press.png",
+          reps: "3 sets x 8–12 reps",
+          level: "Intermediate",
+          difficulty: "medium",
+          tag: "Delts & Triceps"
+        }
+      ],
+      "weight-loss": [
+        {
+          name: "Treadmill Intervals",
+          image:
+            "https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "20–30 mins · 1:1 work:rest",
+          level: "Beginner",
+          difficulty: "easy",
+          tag: "Cardio"
+        },
+        {
+          name: "Kettlebell Swings",
+          image:
+            "kettlebell swings.png",
+          reps: "4 sets x 20 swings",
+          level: "Intermediate",
+          difficulty: "medium",
+          tag: "Full Body"
+        },
+        {
+          name: "Battle Ropes",
+          image:
+            "https://images.pexels.com/photos/6455825/pexels-photo-6455825.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "30–40 sec x 6–8 rounds",
+          level: "Intermediate",
+          difficulty: "hard",
+          tag: "Conditioning"
+        }
+      ],
+      yoga: [
+        {
+          name: "Sun Salutation Flow",
+          image:
+            "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "10–12 rounds",
+          level: "Beginner",
+          difficulty: "easy",
+          tag: "Warm-up"
+        },
+        {
+          name: "Vinyasa Power Yoga",
+          image:
+            "https://images.pexels.com/photos/3822621/pexels-photo-3822621.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "45–60 mins",
+          level: "Intermediate",
+          difficulty: "medium",
+          tag: "Strength & Mobility"
+        },
+        {
+          name: "Guided Meditation",
+          image:
+            "https://images.pexels.com/photos/3822625/pexels-photo-3822625.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "15–20 mins",
+          level: "Beginner",
+          difficulty: "easy",
+          tag: "Mindfulness"
+        }
+      ],
+      cardio: [
+        {
+          name: "CrossFit MetCon",
+          image:
+            "https://images.pexels.com/photos/949129/pexels-photo-949129.jpeg?auto=compress&cs=tinysrgb&w=800",
+          reps: "20 mins AMRAP",
+          level: "Advanced",
+          difficulty: "hard",
+          tag: "Metabolic"
+        },
+        {
+          name: "Rowing Sprints",
+          image:
+            "sprintsrowing.png",
+          reps: "30 sec sprint x 10",
+          level: "Intermediate",
+          difficulty: "medium",
+          tag: "Cardio"
+        },
+        {
+          name: "Assault Bike Intervals",
+          image:
+            "image1.png",
+          reps: "10 rounds · 20/40 protocol",
+          level: "Advanced",
+          difficulty: "hard",
+          tag: "HIIT"
+        }
+      ]
+    };
+
+    // ------------------------------
+    // Timetable data
+    // ------------------------------
+    const timetableData = {
+      morning: {
+        label: "Morning Sessions",
+        columns: ["Bodybuilding", "Weight Loss", "Yoga", "Cardio"],
+        rows: [
+          {
+            time: "6:00 – 7:00 AM",
+            slots: [
+              { title: "Push Day Strength", coach: "Coach Rohan", highlight: true },
+              { title: "Fat Burn Bootcamp", coach: "Coach Neha", highlight: false },
+              { title: "Sunrise Yoga Flow", coach: "Coach Nisha", highlight: true },
+              { title: "Treadmill HIIT", coach: "Coach Aarav", highlight: false }
+            ]
+          },
+          {
+            time: "7:00 – 8:00 AM",
+            slots: [
+              { title: "Legs & Glutes", coach: "Coach Dev", highlight: false },
+              { title: "Core Shred", coach: "Coach Neha", highlight: true },
+              { title: "Power Vinyasa", coach: "Coach Nisha", highlight: false },
+              { title: "Rowing Sprints", coach: "Coach Aarav", highlight: true }
+            ]
+          },
+          {
+            time: "8:00 – 9:00 AM",
+            slots: [
+              { title: "Pull Day Strength", coach: "Coach Rohan", highlight: true },
+              { title: "Mobility & Stretch", coach: "Coach Neha", highlight: false },
+              { title: "Meditation & Breath", coach: "Coach Nisha", highlight: true },
+              { title: "CrossFit MetCon", coach: "Coach Aarav", highlight: true }
+            ]
+          }
+        ]
+      },
+      evening: {
+        label: "Evening Sessions",
+        columns: ["Bodybuilding", "Weight Loss", "Yoga", "Cardio"],
+        rows: [
+          {
+            time: "5:00 – 6:00 PM",
+            slots: [
+              { title: "Upper Body Pump", coach: "Coach Rohan", highlight: true },
+              { title: "Full-Body Burn", coach: "Coach Neha", highlight: true },
+              { title: "After-Work Relax", coach: "Coach Nisha", highlight: false },
+              { title: "Stair Climber HIIT", coach: "Coach Aarav", highlight: false }
+            ]
+          },
+          {
+            time: "6:00 – 7:00 PM",
+            slots: [
+              { title: "Leg Day Power", coach: "Coach Dev", highlight: true },
+              { title: "Cardio Boxing", coach: "Coach Neha", highlight: true },
+              { title: "Stretch & Restore", coach: "Coach Nisha", highlight: true },
+              { title: "Bike Sprints", coach: "Coach Aarav", highlight: false }
+            ]
+          },
+          {
+            time: "7:00 – 8:00 PM",
+            slots: [
+              { title: "Full Body Hypertrophy", coach: "Coach Rohan", highlight: true },
+              { title: "Strength Circuits", coach: "Coach Neha", highlight: false },
+              { title: "Yin Yoga", coach: "Coach Nisha", highlight: true },
+              { title: "Evening Cardio Mix", coach: "Coach Aarav", highlight: true }
+            ]
+          }
+        ]
+      }
+    };
+
+    // ------------------------------
+    // Exercise rendering
+    // ------------------------------
+    const exerciseGrid = document.getElementById("exerciseGrid");
+    const exerciseSubtitle = document.getElementById("exerciseSubtitle");
+
+    const categoryDescriptions = {
+      bodybuilding: "Body Building programs designed for strength and hypertrophy.",
+      "weight-gain": "Weight Gain programs focused on building lean muscle mass.",
+      "weight-loss": "Weight Loss tracks built around fat-burn and conditioning.",
+      yoga: "Yoga & Meditation sessions to realign your body and mind.",
+      cardio: "CrossFit & Cardio circuits for elite conditioning."
+    };
+
+    function renderExercises(category) {
+      const items = exerciseData[category] || [];
+      exerciseGrid.innerHTML = "";
+
+      items.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "exercise-card reveal";
+
+        card.innerHTML = `
+          <div class="exercise-img-wrap">
+            <img src="${item.image}" alt="${item.name}" />
+            <div class="exercise-tag">${item.tag}</div>
+          </div>
+          <div class="exercise-body">
+            <div class="exercise-title">${item.name}</div>
+            <div class="exercise-meta">
+              <span>${item.reps}</span>
+              <span class="difficulty-pill ${item.difficulty}">${item.level}</span>
+            </div>
+          </div>
+        `;
+        exerciseGrid.appendChild(card);
+      });
+
+      exerciseSubtitle.textContent = "Showing: " + (categoryDescriptions[category] || "");
+      triggerReveal(); // animate new cards
+    }
+
+    // ------------------------------
+    // Category filters (side menu)
+    // ------------------------------
+    const categoryButtons = document.querySelectorAll(".category-btn");
+
+    categoryButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        categoryButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const cat = btn.getAttribute("data-category");
+        renderExercises(cat);
+      });
+    });
+
+    // ------------------------------
+    // Timetable rendering
+    // ------------------------------
+    const timetableGrid = document.getElementById("timetableGrid");
+    const timetableTabs = document.querySelectorAll(".timetable-tab");
+
+    function renderTimetable(sessionKey) {
+      const data = timetableData[sessionKey];
+      if (!data) return;
+
+      const { columns, rows } = data;
+      let html = "";
+
+      // Header row
+      html += `<div class="timetable-cell timetable-head">Time</div>`;
+      columns.forEach((col) => {
+        html += `<div class="timetable-cell timetable-head">${col}</div>`;
+      });
+
+      // Rows
+      rows.forEach((row) => {
+        html += `<div class="timetable-cell timetable-head">${row.time}</div>`;
+        row.slots.forEach((slot) => {
+          html += `<div class="timetable-cell timetable-slot">
+              <div class="${slot.highlight ? "highlight" : ""}">
+                ${slot.title}
+                <span>${slot.coach}</span>
+              </div>
+            </div>`;
+        });
+      });
+
+      timetableGrid.innerHTML = html;
+    }
+
+    timetableTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        timetableTabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        const session = tab.getAttribute("data-session");
+        renderTimetable(session);
+      });
+    });
+
+    // ------------------------------
+    // Scroll-triggered reveal
+    // ------------------------------
+    const revealElements = () => Array.from(document.querySelectorAll(".reveal"));
+
+    function triggerReveal() {
+      const elements = revealElements();
+      const windowHeight = window.innerHeight;
+
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowHeight - 80) {
+          el.classList.add("visible");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", triggerReveal);
+    window.addEventListener("resize", triggerReveal);
+
+    // ------------------------------
+    // Ripple effect for buttons
+    // ------------------------------
+    document.addEventListener("click", function (e) {
+      const target = e.target.closest(".ripple");
+      if (!target) return;
+
+      const circle = document.createElement("span");
+      circle.classList.add("ripple-circle");
+      const diameter = Math.max(target.clientWidth, target.clientHeight);
+      const radius = diameter / 2;
+
+      const rect = target.getBoundingClientRect();
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${e.clientX - rect.left - radius}px`;
+      circle.style.top = `${e.clientY - rect.top - radius}px`;
+
+      const existing = target.getElementsByClassName("ripple-circle")[0];
+      if (existing) {
+        existing.remove();
+      }
+
+      target.appendChild(circle);
+    });
+
+    // ------------------------------
+    // Hero parallax effect
+    // ------------------------------
+    const heroBG = document.getElementById("heroBG");
+    window.addEventListener("scroll", () => {
+      const offset = window.scrollY;
+      if (heroBG) {
+        heroBG.style.transform = `translateY(${offset * -0.08}px) scale(1.08)`;
+      }
+    });
+
+    // ------------------------------
+    // Smooth scrolling for nav links
+    // ------------------------------
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href").slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    // ------------------------------
+    // Initialize page
+    // ------------------------------
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderExercises("bodybuilding");
+    renderTimetable("morning");
+    triggerReveal();
+  </script>
+</body>
+</html>
